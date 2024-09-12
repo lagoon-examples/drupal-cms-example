@@ -28,8 +28,8 @@ services:
   cli: # cli container, will be used for executing composer and any local commands (drush, drupal, etc.)
     build:
       context: .
-      dockerfile: .lagoon/cli.dockerfile
-    image: &cli-image ${COMPOSE_PROJECT_NAME:-drupal-cms-example}-cli # this image will be reused as `CLI_IMAGE` in subsequent Docker builds
+      target: cli
+      dockerfile: .lagoon/Dockerfile
     labels:
       # Lagoon Labels
       lagoon.type: cli-persistent
@@ -44,9 +44,8 @@ services:
   nginx:
     build:
       context: .
-      dockerfile: .lagoon/nginx.dockerfile
-      args:
-        CLI_IMAGE: *cli-image # Inject the name of the cli image
+      target: nginx
+      dockerfile: .lagoon/Dockerfile
     labels:
       lagoon.type: nginx-php-persistent
       lagoon.persistent: /app/web/sites/default/files/ # define where the persistent storage should be mounted too
@@ -65,9 +64,8 @@ services:
   php:
     build:
       context: .
-      dockerfile: .lagoon/php.dockerfile
-      args:
-        CLI_IMAGE: *cli-image
+      target: php
+      dockerfile: .lagoon/Dockerfile
     labels:
       lagoon.type: nginx-php-persistent
       lagoon.name: nginx # we want this service be part of the nginx pod in Lagoon
