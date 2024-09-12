@@ -9,6 +9,13 @@
         "chat": "https://drupal.org/node/314178"
     },
     "repositories": {
+        "drupal_cms": {
+            "type": "path",
+            "url": "./drupal_cms/*",
+            "options": {
+                "symlink": false
+            }
+        },
         "drupal": {
             "type": "composer",
             "url": "https://packages.drupal.org/8"
