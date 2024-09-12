@@ -1,9 +1,0 @@
-#!/usr/bin/env sh
-#
-# Adds all Drupal CMS components as globally available path repositories.
-#
-composer config --global --unset repositories
-
-for path in $(find $PWD -maxdepth 2 -type d -name 'drupal_cms*'); do
-  composer config --global repositories.$(basename $path) path $path
-done
