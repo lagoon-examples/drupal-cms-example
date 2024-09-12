@@ -18,7 +18,7 @@ docker compose down
 docker compose build && docker compose up -d
 
 # Ensure mariadb pod is ready to connect
-docker compose exec cli bash -c 'wait-for mariadb:3306'
+docker compose exec -T cli bash -c "wait-for mariadb:3306"
 ```
 
 Verification commands
