@@ -30,7 +30,7 @@
         "drupal/drupal_cms": "*",
         "drupal/drupal_cms_installer": "*",
         "drush/drush": "^12.5",
-        "amazeeio/drupal_integrations": "^0.4",
+        "amazeeio/drupal_integrations": "^0.5",
         "drupal/lagoon_logs": "^3.0"
     },
     "require-dev": {
