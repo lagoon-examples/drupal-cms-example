@@ -16,6 +16,23 @@ tasks:
     #     command: drush -y cim
     #     service: cli
     - run:
+        name: composer update
+        command: composer update
+        service: php
+        shell: sh
+    - run:
+        name: composer re-disable scaffold
+        command: composer config extra.drupal-scaffold --unset
+        service: php
+        shell: sh
+    - run:
+        name: set directory permissions
+        command: |
+          fix-permissions /app/vendor
+          fix-permissions /app/web
+        service: php
+        shell: sh
+    - run:
         name: drush updb
         command: drush -y updb
         service: cli

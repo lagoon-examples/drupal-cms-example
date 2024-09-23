@@ -3,6 +3,8 @@ x-volumes:
     # Define all volumes you would like to have real-time mounted into the docker containers
     volumes:
       - files:/app/web/sites/default/files
+      - app:/app/web
+      - vendor:/app/vendor
 
 x-environment:
   &default-environment
@@ -19,6 +21,10 @@ x-user:
 
 volumes:
   files:
+    {}
+  app:
+    {}
+  vendor:
     {}
   db:
     {}
