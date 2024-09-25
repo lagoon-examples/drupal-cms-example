@@ -18,19 +18,22 @@ tasks:
     - run:
         name: composer update
         command: composer update
-        service: php
+        service: nginx
+        container: php
         shell: sh
     - run:
         name: composer re-disable scaffold
         command: composer config extra.drupal-scaffold --unset
-        service: php
+        service: nginx
+        container: php
         shell: sh
     - run:
         name: set directory permissions
         command: |
           fix-permissions /app/vendor
           fix-permissions /app/web
-        service: php
+        service: nginx
+        container: php
         shell: sh
     - run:
         name: drush updb
