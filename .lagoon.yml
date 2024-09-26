@@ -27,6 +27,13 @@ tasks:
         service: nginx
         container: php
         shell: sh
+    - run:
+        name: composer check
+        command: |
+          /usr/local/bin/composer validate --check-lock --no-check-publish --with-dependencies --no-ansi --working-dir=/app
+        service: nginx
+        container: php
+        shell: sh
     # - run:
     #     name: set directory permissions
     #     command: |
