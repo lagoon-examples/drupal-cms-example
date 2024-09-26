@@ -27,14 +27,14 @@ tasks:
         service: nginx
         container: php
         shell: sh
-    - run:
-        name: set directory permissions
-        command: |
-          fix-permissions /app/vendor
-          fix-permissions /app/web
-        service: nginx
-        container: php
-        shell: sh
+    # - run:
+    #     name: set directory permissions
+    #     command: |
+    #       fix-permissions /app/vendor
+    #       fix-permissions /app/web
+    #     service: nginx
+    #     container: php
+    #     shell: sh
     - run:
         name: drush updb
         command: drush -y updb
