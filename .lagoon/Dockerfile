@@ -27,8 +27,7 @@ ENV WEBROOT=web
 FROM uselagoon/php-8.3-fpm:latest AS php
  
 COPY --from=cli /app /app
-
-ENV PATH="$PATH:/app/vendor/bin:/home/.composer/vendor/bin"
+COPY --from=cli /usr/local/bin/composer /usr/local/bin/composer
 
 RUN apk add --no-cache \
     rsync
