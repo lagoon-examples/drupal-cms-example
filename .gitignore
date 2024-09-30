@@ -1,0 +1,8 @@
+drupal_cms
+drush
+vendor
+web
+web/sites/default/files
+/.drush-lock-update
+/.editorconfig
+/.gitattributes

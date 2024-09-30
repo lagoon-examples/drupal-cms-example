@@ -16,6 +16,12 @@ tasks:
     #     command: drush -y cim
     #     service: cli
     - run:
+        name: composer install
+        command: |
+            git clone https://github.com/lagoon-examples/drupal-cms-example
+        service: cli
+        shell: bash
+    - run:
         name: composer update
         command: composer update
         service: nginx

@@ -1,0 +1,4 @@
+[submodule "drupal_cms"]
+	path = drupal_cms
+	url = https://git.drupalcode.org/project/drupal_cms.git
+	branch = 0.x

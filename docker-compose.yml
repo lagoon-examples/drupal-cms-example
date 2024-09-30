@@ -3,8 +3,8 @@ x-volumes:
     # Define all volumes you would like to have real-time mounted into the docker containers
     volumes:
       - files:/app/web/sites/default/files
-      - app:/app/web
-      - vendor:/app/vendor
+      - composer-cache:/home/.composer/cache
+      - .:/app:delegated
 
 x-environment:
   &default-environment
@@ -20,12 +20,16 @@ x-user:
     user: '1000'
 
 volumes:
-  files:
-    {}
   app:
-    {}
-  vendor:
-    {}
+    labels:
+      lagoon.type: persistent
+  files:
+    labels:
+      lagoon.type: persistent
+  composer-cache:
+    labels:
+      lagoon.type: persistent
+      lagoon.backup: false
   db:
     {}
 
@@ -39,8 +43,9 @@ services:
     labels:
       # Lagoon Labels
       lagoon.type: cli-persistent
-      lagoon.persistent.name: nginx # mount the persistent storage of nginx into this container
-      lagoon.persistent: /app/web/sites/default/files/ # location where the persistent storage should be mounted
+      lagoon.volumes.app.path: /app/
+      lagoon.volumes.files.path: /app/web/sites/default/
+      lagoon.volumes.composer-cache.path: /home/.composer/cache/
       lando.type: php-cli-drupal
     << : [*default-volumes] # loads the defined volumes from the top
     user: root
@@ -54,7 +59,8 @@ services:
       dockerfile: .lagoon/Dockerfile
     labels:
       lagoon.type: nginx-php-persistent
-      lagoon.persistent: /app/web/sites/default/files/ # define where the persistent storage should be mounted too
+      lagoon.volumes.app.path: /app/
+      lagoon.volumes.files.path: /app/web/sites/default/
       lando.type: nginx-drupal
     ports:
       - "8080" # exposes the port 8080 with a random local port, find it with `docker compose port nginx 8080`
@@ -75,7 +81,9 @@ services:
     labels:
       lagoon.type: nginx-php-persistent
       lagoon.name: nginx # we want this service be part of the nginx pod in Lagoon
-      lagoon.persistent: /app/web/sites/default/files/ # define where the persistent storage should be mounted too
+      lagoon.volumes.app.path: /app/
+      lagoon.volumes.files.path: /app/web/sites/default/
+      lagoon.volumes.composer-cache.path: /home/.composer/cache/
       lando.type: php-fpm
     << : [*default-volumes, *default-user]
     depends_on:
