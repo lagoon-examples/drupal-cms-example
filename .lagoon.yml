@@ -13,17 +13,21 @@ tasks:
     # Enable once config sync has been setup.
     # - run:
     #     name: drush cim
-    #     command: drush -y cim
+    #     command: |
+    #       if ! [[ "$(drush status --field=Database)" == "Connected" ]]; then drush si -y; fi
     #     service: cli
     - run:
         name: set up drupal-cms
-        command: if ! [[ $(drush status --field=Database) == "Connected" ]]; then drush si -y; fi
+        command: |
+          if ! [[ "$(drush status --field=Database)" == "Connected" ]]; then drush si -y; fi
         service: cli
     - run:
         name: drush updb
-        command: drush -y updb
+        command: |
+          if ! [[ "$(drush status --field=Database)" == "Connected" ]]; then drush updb -y; fi
         service: cli
     - run:
         name: drush cr
-        command: drush -y cr
+        command: |
+          if ! [[ "$(drush status --field=Database)" == "Connected" ]]; then drush -y cr; fi
         service: cli
