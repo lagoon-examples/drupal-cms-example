@@ -24,10 +24,10 @@ tasks:
     - run:
         name: drush updb
         command: |
-          if ! [[ "$(drush status --field=Database)" == "Connected" ]]; then drush updb -y; fi
+          if [[ "$(drush status --field=Database)" == "Connected" ]]; then drush updb -y; fi
         service: cli
     - run:
         name: drush cr
         command: |
-          if ! [[ "$(drush status --field=Database)" == "Connected" ]]; then drush -y cr; fi
+          if [[ "$(drush status --field=Database)" == "Connected" ]]; then drush -y cr; fi
         service: cli
