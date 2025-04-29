@@ -4,7 +4,7 @@
 
 This is an example project demonstrating how to set up a Drupal CMS based environment on Lagoon.
 
-When running on a Lagoon instance, the first time that the project starts up, it will attempt to install Drupal-CMS - see the `.lagoon.yml` file for how this is achieved using a post rollout task.
+When running on a Lagoon instance, the first time that the project starts up, it will attempt to install Drupal CMS - see the `.lagoon.yml` file for how this is achieved using a post rollout task.
 
 The `./.lagoon/scripts/scaffold.sh` script plays a key role in setting up the project, ensuring necessary dependencies and configurations are applied when running locally versus within Lagoon. See the file and the Dockerfile to see how this is achieved.
 
@@ -12,21 +12,27 @@ The `./.lagoon/scripts/scaffold.sh` script plays a key role in setting up the pr
 
 ### How to Run Locally
 
-To set up and run the project locally, execute the following commands:
+To set up and run the project locally, after ensuring docker is running, execute the following commands:
 
 ```sh
+pygmy up
 docker compose build
 docker compose up -d
 docker compose exec cli bash -c 'wait-for mariadb:3306'
-docker compose exec cli bash -c 'drush -y si && drush -y cr'
+docker compose exec cli bash -c 'drush -y si && drush -y cr && drush uli'
 ```
+
+(ignore the warnings referring to block plugins not being found. 
+This is a known issue which will be fixed with this https://www.drupal.org/project/drupal/issues/3478773#comment-16090318)
+
 
 These commands will:
 
-1. Build the necessary Docker containers.
-2. Start the containers in detached mode.
-3. Wait for the MariaDB service to become available.
-4. Install Drupal and rebuild the cache using Drush.
+1. Start Pygmy.
+2. Build the necessary Docker containers.
+3. Start the containers in detached mode.
+4. Wait for the MariaDB service to become available.
+5. Install Drupal and rebuild the cache using Drush.
 
 ### Using the Project Browser to install modules (Only Usable When Running Locally)
 
