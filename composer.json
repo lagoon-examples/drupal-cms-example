@@ -17,7 +17,7 @@
     "require": {
         "amazeeio/drupal_integrations": "^0.4",
         "cweagans/composer-patches": "^2",
-        "drupal/cms": "^1.0.2",
+        "drupal/cms": "^1.1",
         "drupal/lagoon_logs": "^3.0"
     },
     "conflict": {
