@@ -9,7 +9,6 @@ if [ ! -f "$FLAG_FILE" ]; then
     echo "*** NO SCAFFOLD FILE FOUND ***"
     git config --global --add safe.directory /app
     composer install --no-dev
-    cp -r /app/vendor/drupal/cms/web/profiles/drupal_cms_installer /app/web/profiles/
     # Create the flag file to indicate the script has run
     echo "About to create $FLAG_FILE"
     touch "$FLAG_FILE"

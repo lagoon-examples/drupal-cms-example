@@ -1,4 +1,4 @@
-FROM uselagoon/php-8.4-cli-drupal:latest AS cli
+FROM testlagoon/php-8.5-cli-drupal:arm64-images AS cli
 
 # set up scaffolding for drupal-cms
 COPY .lagoon/scripts/scaffold.sh /lagoon/entrypoints/999-drupal-cms-scaffold.sh
@@ -21,7 +21,7 @@ COPY --from=cli /app /app
 
 ENV WEBROOT=web
 
-FROM uselagoon/php-8.4-fpm:latest AS php
+FROM testlagoon/php-8.5-fpm:arm64-images AS php
  
 COPY --from=cli /app /app
 # php-fpm needs to have the composer binary and rsync available
